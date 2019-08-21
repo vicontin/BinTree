@@ -166,8 +166,25 @@ namespace BinTreeTest
             _sut.Add(expectedLeft);
             _sut.Add(expectedRight);
             _sut.Add(expectedLowest);
-            //var actualLowest = _sut.GetLowest();
+            var actualLowest = _sut.GetLowest();
 
+            Assert.Equal(expectedLowest, actualLowest.Value);
+        }
+
+        [Fact]
+        public void AddValuesAndFindhighetValue()
+        {
+            var seed = 20;
+            var expectedLeft = 10;
+            var expectedRight = 30;
+            var expectedHighest = 300;
+            _sut = new Node<int>(seed);
+            _sut.Add(expectedLeft);
+            _sut.Add(expectedRight);
+            _sut.Add(expectedHighest);
+            var actualLowest = _sut.GetHighest();
+
+            Assert.Equal(expectedHighest, actualLowest.Value);
         }
 
         #endregion

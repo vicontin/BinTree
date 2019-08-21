@@ -57,6 +57,34 @@ namespace Tree
             return null;
         }
 
+        internal Node<T> GetLowest()
+        {
+            var currentNode = this;
+            while(currentNode != null)
+            {
+                if(currentNode._left == null)
+                {
+                    return currentNode;
+                }
+                currentNode = currentNode._left;
+            }
+            return null;
+        }
+
+        internal Node<T> GetHighest()
+        {
+            var currentNode = this;
+            while (currentNode != null)
+            {
+                if (currentNode._right == null)
+                {
+                    return currentNode;
+                }
+                currentNode = currentNode._right;
+            }
+            return null;
+        }
+
         private static void AddToChildNode(ref Node<T> child, T value)
         {
             if(child == null)
