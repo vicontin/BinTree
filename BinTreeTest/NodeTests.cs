@@ -152,5 +152,24 @@ namespace BinTreeTest
         }
 
         #endregion
+
+        #region
+
+        [Fact]
+        public void AddValuesAndFindLowestValue()
+        {
+            var seed = 20;
+            var expectedLeft = 10;
+            var expectedRight = 30;
+            var expectedLowest = 3;
+            _sut = new Node<int>(seed);
+            _sut.Add(expectedLeft);
+            _sut.Add(expectedRight);
+            _sut.Add(expectedLowest);
+            //var actualLowest = _sut.GetLowest();
+
+        }
+
+        #endregion
     }
 }
