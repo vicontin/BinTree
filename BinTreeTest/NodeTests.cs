@@ -1,11 +1,13 @@
-﻿using Tree;
+﻿using System;
+using System.Collections.Generic;
+using Tree;
 using Xunit;
 
 namespace BinTreeTest
 {
     public class NodeTests
     {
-        private Node<int> _sut;
+        private INode<int> _sut;
 
         #region CreateAndAdd
 
@@ -149,6 +151,42 @@ namespace BinTreeTest
             Assert.Equal(seed, actualSeed.Value);
             Assert.Equal(expectedLeft, actualLeft.Value);
             Assert.Equal(expectedRight, actualRight.Value);
+        }
+
+        #endregion
+
+        #region GetSorted
+
+        [Fact]
+        public void GetSortedList()
+        {
+            var expected = new int[] {1, 2, 3, 4, 5};
+            IList<int> actual = new List<int>();
+            _sut = new Node<int>(2);
+            _sut.Add(5);
+            _sut.Add(1);
+            _sut.Add(3);
+            _sut.Add(4);
+
+            _sut.GetSorted(actual);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void GetSortedListDescending()
+        {
+            var expected = new int[] {5, 4, 3, 2, 1};
+            IList<int> actual = new List<int>();
+            _sut = new Node<int>(2);
+            _sut.Add(5);
+            _sut.Add(1);
+            _sut.Add(3);
+            _sut.Add(4);
+
+            _sut.GetSortedDescending(actual);
+
+            Assert.Equal(expected, actual);
         }
 
         #endregion

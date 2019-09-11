@@ -4,15 +4,15 @@ using System.Runtime.CompilerServices;
 [assembly: InternalsVisibleTo("BinTreeTest")]
 namespace Tree
 {
-    internal class Node<T>
+    internal class Node<T> : INode<T>
     {
 
-        private T _value;
+        private readonly T _value;
         private Node<T> _left;
         private Node<T> _right;
 
-        internal bool LeftIsPopulated => _left != null;
-        internal bool RightIsPopulated => _right != null;
+        public bool LeftIsPopulated => _left != null;
+        public bool RightIsPopulated => _right != null;
         public T Value => _value;
 
         internal Node(T value)
@@ -20,7 +20,7 @@ namespace Tree
             _value = value;
         }
 
-        internal void Add(T value)
+        public void Add(T value)
         {
             if (Comparer<T>.Default.Compare(_value, value) > 0)
             {
@@ -34,7 +34,7 @@ namespace Tree
             }
         }
 
-        internal Node<T> Find(T value)
+        public Node<T> Find(T value)
         {
             var currentNode = this;
 
@@ -57,7 +57,7 @@ namespace Tree
             return null;
         }
 
-        internal Node<T> GetLowest()
+        public Node<T> GetLowest()
         {
             var currentNode = this;
             while(currentNode != null)
@@ -71,7 +71,7 @@ namespace Tree
             return null;
         }
 
-        internal Node<T> GetHighest()
+        public Node<T> GetHighest()
         {
             var currentNode = this;
             while (currentNode != null)
@@ -83,6 +83,34 @@ namespace Tree
                 currentNode = currentNode._right;
             }
             return null;
+        }
+
+        public void GetSorted(IList<T> list)
+        {
+            var currentNode = this;
+            if (currentNode.LeftIsPopulated)
+            {
+                currentNode._left.GetSorted(list);
+            }
+            list.Add(_value);
+            if (currentNode.RightIsPopulated)
+            {
+               currentNode._right.GetSorted(list);
+            }
+        }
+
+        public void GetSortedDescending(IList<T> list)
+        {
+            var currentNode = this;
+            if (currentNode.RightIsPopulated)
+            {
+                currentNode._right.GetSortedDescending(list);
+            }
+            list.Add(_value);
+            if (currentNode.LeftIsPopulated)
+            {
+                currentNode._left.GetSortedDescending(list);
+            }
         }
 
         private static void AddToChildNode(ref Node<T> child, T value)
