@@ -87,29 +87,27 @@ namespace Tree
 
         public void GetSorted(IList<T> list)
         {
-            var currentNode = this;
-            if (currentNode.LeftIsPopulated)
+            if (LeftIsPopulated)
             {
-                currentNode._left.GetSorted(list);
+                _left.GetSorted(list);
             }
             list.Add(_value);
-            if (currentNode.RightIsPopulated)
+            if (RightIsPopulated)
             {
-               currentNode._right.GetSorted(list);
+               _right.GetSorted(list);
             }
         }
 
         public void GetSortedDescending(IList<T> list)
         {
-            var currentNode = this;
-            if (currentNode.RightIsPopulated)
+            if (RightIsPopulated)
             {
-                currentNode._right.GetSortedDescending(list);
+                _right.GetSortedDescending(list);
             }
             list.Add(_value);
-            if (currentNode.LeftIsPopulated)
+            if (LeftIsPopulated)
             {
-                currentNode._left.GetSortedDescending(list);
+                _left.GetSortedDescending(list);
             }
         }
 
